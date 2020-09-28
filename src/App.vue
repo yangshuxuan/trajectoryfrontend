@@ -1,33 +1,26 @@
 <template>
   <div id="app">
-    <div>{{ info }}</div>
-    <GmapMap
-      :center="{ lat: 30, lng: 120 }"
-      :zoom="7"
-      map-type-id="terrain"
-      style="width: 100%; height: 800px"
-    >
-      <GmapMarker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        :clickable="true"
-        :draggable="true"
-        @click="center = m.position"
-      />
-    </GmapMap>
+    <!-- <div>{{ info }}</div>
+    <DynamicState v-if="show"></DynamicState> -->
+    <RealTimeMap/>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
+//import DynamicState from './components/DynamicState'
+//import Restaurants from "./components/Restaurants"
+import RealTimeMap from "./components/RealTimeMap"
 export default {
   name: "App",
-  components: {},
+  components: {
+    //DynamicState,
+    RealTimeMap,
+    //Restaurants
+    },
   data() {
     return {
-      markers: [{ position: { lat: 31, lng: 121 } }],
+      show:false,
       info: "hello world",
     };
   },
