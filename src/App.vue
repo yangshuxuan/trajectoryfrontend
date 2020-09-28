@@ -1,19 +1,49 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>{{ info }}</div>
+    <GmapMap
+      :center="{ lat: 30, lng: 120 }"
+      :zoom="7"
+      map-type-id="terrain"
+      style="width: 100%; height: 800px"
+    >
+      <GmapMarker
+        :key="index"
+        v-for="(m, index) in markers"
+        :position="m.position"
+        :clickable="true"
+        :draggable="true"
+        @click="center = m.position"
+      />
+    </GmapMap>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from "axios";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: {},
+  data() {
+    return {
+      markers: [{ position: { lat: 31, lng: 121 } }],
+      info: "hello world",
+    };
+  },
+
+  mounted() {
+    axios({ method: "GET", "url": "https://trajectoryanalysis.azurewebsites.net/lastappeared" })
+      .then((response) => {
+        console.log(response);
+        this.info = response;
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  },
+};
 </script>
 
 <style>
