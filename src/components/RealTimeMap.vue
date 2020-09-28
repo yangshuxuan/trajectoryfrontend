@@ -5,6 +5,7 @@
       <map-marker
         :key="index"
         v-for="(m, index) in markers"
+        :objectInfo="m"
         :lat="m.lat"
         :lng="m.lng"
       />
@@ -24,23 +25,36 @@ export default {
   },
   data: () => ({
     map: null,
-    markers: [{ lat: -27.344, lng: 133.036 }],
+    markers: [
+      {
+          object_id: "1",
+          lastmodified_time: "2020-09-23 16:11:00",
+          long: 120.036,
+          lat: 31.344,
+        }
+      
+    ],
     intervalid1: null,
   }),
   methods: {
     todo: function () {
+    let vm = this;
       this.intervalid1 = setInterval(function () {
-          console.log("hi")
+        console.log("hi");
         axios({
           method: "GET",
           url: "http://127.0.0.1:5002/lastappeared",
         })
           .then((response) => {
-            console.log(response);
-
+   
+            console.log(response.data[0])
+            console.log(response.status)
+            vm.markers= response.data
+            //k = {}
+            //vm.markers.push(response.data[0])
+            //console.log(vm.markers)
           })
           .catch(function (error) {
-
             console.log(error);
           });
       }, 3000);
@@ -60,10 +74,9 @@ export default {
   mounted() {
     this.todo();
     this.map = new window.google.maps.Map(this.$refs["map"], {
-      center: { lat: -23.444, lng: 129.036 },
+      center: { lat: 31.1, lng: 120.01},
       zoom: 7,
     });
-    
   },
   beforeDestroy() {
     clearInterval(this.intervalid1);

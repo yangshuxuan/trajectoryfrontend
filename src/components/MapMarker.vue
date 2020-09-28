@@ -1,15 +1,8 @@
 <script>
 export default {
   props: {
-    // {
-    //     "object_id": "1",
-    //     "lastmodified_time": "2020-09-23 16:11:00",
-    //     "long": 4.0,
-    //     "lat": 1.0
-    // }
-    //objectInfo:
-    lat: { type: Number, required: true },
-    lng: { type: Number, required: true },
+    
+    objectInfo:{ type: Object, required: true }
   },
   data: () => ({
     marker: null,
@@ -17,7 +10,7 @@ export default {
   mounted() {
     this.$parent.getMap((map) => {
       this.marker = new window.google.maps.Marker({
-        position: { lat: this.lat, lng: this.lng },
+        position: { lat: this.objectInfo.lat, lng: this.objectInfo.long },
         map: map,
       });
     });
