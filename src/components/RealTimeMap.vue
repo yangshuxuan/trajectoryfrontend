@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="content">
     <button v-on:click="removeMarkers">RemoveMarkers</button>
     <div id="map" ref="map">
       <map-marker
@@ -75,7 +75,7 @@ export default {
     this.todo();
     this.map = new window.google.maps.Map(this.$refs["map"], {
       center: { lat: 31.1, lng: 120.01},
-      zoom: 7,
+      zoom: 7
     });
   },
   beforeDestroy() {
@@ -86,7 +86,13 @@ export default {
 
 <style scoped>
 #map {
-  height: 600px;
+  /* height: 600px; */
+  width: 100%; height: 100%;
   background: gray;
+}
+
+
+div#content {
+  width: 100%; height: 100%;
 }
 </style>

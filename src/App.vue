@@ -46,6 +46,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: brown;
   margin-top: 60px;
+  width: 100%; height: 100%;
+}
+body, html {
+  height: 100%;
+  width: 100%;
 }
 </style>
