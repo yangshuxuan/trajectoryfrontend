@@ -1,22 +1,29 @@
 <template>
   <div id="app">
-    <!-- <div>{{ info }}</div>
-    <DynamicState v-if="show"></DynamicState> -->
-    <RealTimeMap/>
+    <!-- <Navbar2 />
+    <RealTimeMap/> -->
+    <testtooltip/>
+    <testfrom/>
+    
   </div>
 </template>
 
 <script>
 import axios from "axios";
-//import DynamicState from './components/DynamicState'
-//import Restaurants from "./components/Restaurants"
-import RealTimeMap from "./components/RealTimeMap"
+
+// import Navbar2 from './components/Navbar2.vue'; 
+// import RealTimeMap from "./components/RealTimeMap"
+import testtooltip from "./components/testtooltip"
+import testfrom from "./components/testfrom"
 export default {
   name: "App",
   components: {
-    //DynamicState,
-    RealTimeMap,
-    //Restaurants
+
+    // RealTimeMap,
+    // Navbar2,
+    testtooltip,
+    testfrom
+
     },
   data() {
     return {
@@ -41,17 +48,13 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  background-color: brown;
-  margin-top: 60px;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 body, html {
   height: 100%;
   width: 100%;
+  margin: 0;
 }
 </style>

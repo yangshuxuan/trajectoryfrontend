@@ -1,18 +1,14 @@
 <template>
-  <div id="content">
-    <button v-on:click="removeMarkers">RemoveMarkers</button>
-    <div id="map" ref="map">
-      <map-marker
+  <div class="fill" id="map" ref="map">
+
+      <MapMarker
         :key="index"
         v-for="(m, index) in markers"
         :objectInfo="m"
         :lat="m.lat"
         :lng="m.lng"
       />
-      <!-- <map-marker :lat="-27.344" :lng="133.036"></map-marker>
-    <map-marker :lat="-26.344" :lng="132.036"></map-marker>
-    <map-marker :lat="-25.344" :lng="131.036"></map-marker> -->
-    </div>
+
   </div>
 </template>
 
@@ -27,18 +23,17 @@ export default {
     map: null,
     markers: [
       {
-          object_id: "1",
-          lastmodified_time: "2020-09-23 16:11:00",
-          long: 120.036,
-          lat: 31.344,
-        }
-      
+        object_id: "1",
+        lastmodified_time: "2020-09-23 16:11:00",
+        long: 120.036,
+        lat: 31.344,
+      },
     ],
     intervalid1: null,
   }),
   methods: {
     todo: function () {
-    let vm = this;
+      let vm = this;
       this.intervalid1 = setInterval(function () {
         console.log("hi");
         axios({
@@ -46,13 +41,8 @@ export default {
           url: "http://127.0.0.1:5002/lastappeared",
         })
           .then((response) => {
-   
-            console.log(response.data[0])
-            console.log(response.status)
-            vm.markers= response.data
-            //k = {}
-            //vm.markers.push(response.data[0])
-            //console.log(vm.markers)
+            console.log(response.data[0]);
+            vm.markers = response.data;
           })
           .catch(function (error) {
             console.log(error);
@@ -74,8 +64,8 @@ export default {
   mounted() {
     this.todo();
     this.map = new window.google.maps.Map(this.$refs["map"], {
-      center: { lat: 31.1, lng: 120.01},
-      zoom: 7
+      center: { lat: 31.1, lng: 120.01 },
+      zoom: 7,
     });
   },
   beforeDestroy() {
@@ -85,14 +75,15 @@ export default {
 </script>
 
 <style scoped>
-#map {
-  /* height: 600px; */
-  width: 100%; height: 100%;
-  background: gray;
-}
 
 
-div#content {
-  width: 100%; height: 100%;
+.fill {
+  /* min-height: 100%; */
+  
+  min-width: 100%;
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
 }
+
 </style>
